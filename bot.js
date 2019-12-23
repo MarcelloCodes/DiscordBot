@@ -13,8 +13,6 @@ const prefixow = preferencias.prefixow;
 const fs = require('fs');
 var comandos = new Discord.Collection();
 
-client.login(process.env.TOKEN);
-
 client.on('ready', () =>{
 console.log('\n==============================');
 console.log('CONECTADO! BOT ONLINE!');
@@ -288,4 +286,6 @@ if(!message.content.startsWith(prefix)) return;
    } catch (err) {
 	   return;
    }
+	
 });
+client.login(process.env.TOKEN);
