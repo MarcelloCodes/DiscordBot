@@ -4,7 +4,7 @@ const Youtube = require('simple-youtube-api');
 const Ytdl = require('ytdl-core');
 const filaDeMusicas = [];
 let estouPronto = false;
-const {GOOGLE_KEY, TOKEN } = require('./config.js');
+const {GOOGLE_KEY } = require('./config.js');
 const youtube = new Youtube(GOOGLE_KEY);
 const client = new Discord.Client();
 const preferencias = require('./config.json');
@@ -13,7 +13,7 @@ const prefixow = preferencias.prefixow;
 const fs = require('fs');
 var comandos = new Discord.Collection();
 
-client.login(TOKEN);
+client.login(process.env.TOKEN);
 
 client.on('ready', () =>{
 console.log('\n==============================');
