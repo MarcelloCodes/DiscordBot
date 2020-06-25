@@ -13,7 +13,7 @@ const prefixow = preferencias.prefixow;
 const fs = require('fs');
 var comandos = new Discord.Collection();
 
-client.login(process.env.token);
+client.login(process.env.TOKEN);
 
 client.on('ready', () =>{
 console.log('\n==============================');
