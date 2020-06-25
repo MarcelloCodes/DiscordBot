@@ -1,10 +1,21 @@
+const http = require('http');
+const express = require('express');
+const app = express();
+app.get("/", (request, response) => {
+  console.log(Date.now() + " Ping Received");
+  response.sendStatus(200);
+});
+app.listen(process.env.PORT);
+setInterval(() => {
+  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
+}, 280000);
 console.log('Conectando...');
 const Discord = require('discord.js');
 const Youtube = require('simple-youtube-api');
 const Ytdl = require('ytdl-core');
 const filaDeMusicas = [];
 let estouPronto = false;
-const {GOOGLE_KEY } = require('./config.js');
+const {GOOGLE_KEY, TOKEN } = require('./config.js');
 const youtube = new Youtube(GOOGLE_KEY);
 const client = new Discord.Client();
 const preferencias = require('./config.json');
@@ -13,13 +24,15 @@ const prefixow = preferencias.prefixow;
 const fs = require('fs');
 var comandos = new Discord.Collection();
 
+client.login(TOKEN);
+
 client.on('ready', () =>{
 console.log('\n==============================');
 console.log('CONECTADO! BOT ONLINE!');
 console.log(`O meu prefixo é ${prefix}`);
 console.log('==============================');
 	
-    const activities = ['no Blackmc.cf', 'jogos como Vocês 😍', 'use ;ajuda para ver meus cmds.', 'criado por Sloowy#1630.']
+    const activities = ['Free Fire', 'jogos como Vocês 😍', 'use ;ajuda para ver meus cmds.', 'criado por ADS Luffy#7305']
     let counter = 0
     setInterval(function() {
         client.user.setGame(activities[counter], "https://www.twitch.tv/marcelloowdlc")
@@ -35,13 +48,13 @@ console.log(`${member}`, "entrou!" + `${member.guild.name}`)
 });
 client.on('guildMemberAdd', member => {
     var role = member.guild.roles.find('name', 'Em Captcha');
-    var role2 = member.guild.roles.find('name', '👤| Membros');
+    var role2 = member.guild.roles.find('name', '👤Membros');
     member.addRole(role)
     let captcha = new Discord.RichEmbed()
      .setDescription('CAPTCHA\n\n<@' + member.id + '> Isso é apenas um captcha, para seguir para o discord\nreaja abaixo com :tickets: ')
      .setColor('#0a9fb3')
      .setTimestamp()
-      let entrada = member.guild.channels.find(c => c.name == 'captcha') ;
+      let entrada = member.guild.channels.find(c => c.name == '🔐-captcha') ;
       entrada.send(captcha).then(msg => {
         msg.react('🎟')
      const admfilter = (reaction, user) => reaction.emoji.name === '🎟' && user.id === member.id;
@@ -49,38 +62,37 @@ client.on('guildMemberAdd', member => {
  adm.on('collect', async bot => {
                 member.addRole(role2)
                 member.removeRole(role)
-                client.message.delete(captcha)
+                bot.message.delete(captcha)
         })})})
 client.on('guildMemberAdd', member => {
-  let channel = member.guild.channels.find('name', '🚪│entrada');
+  let channel = member.guild.channels.find('name', '🏠-bem_vindo');
   let avatar = member.user.avatarURL
   if (!channel) return;
   let embed = new Discord.RichEmbed()
       .setColor('RANDOM')
       .setThumbnail(avatar)
-      .addField('🎊 Bem vindo ao discord.', `Bem vindo(a) ${member} ao discord oficial do BlackMC!\n Você foi o __${member.guild.memberCount}__ player a entrar em nosso servidor\n \nPara interagir com os player vá em: <#601625999687286784>\nPara ver os nossos anúncios vá em: <#588053875324616704>\n`)
-      .setFooter(`Black - Entrada`);
+      .addField('🎊 Bem vindo ao discord.', `Bem vindo(a) ${member} ao discord oficial do ADSUMUS GAMING!\n Você foi o __${member.guild.memberCount}__ player a entrar em nosso servidor\n \nPara interagir com os player vá em: <#717767641543999530>\nPara ver os nossos eventos vá em: <#718147682388148334>\n`)
+      .setFooter(`ADSUMUS - Entrada`);
       channel.sendEmbed(embed);
 });
 client.on('guildMemberRemove', member => {
-    let channel = member.guild.channels.find('name', '🚪│saída');
+    let channel = member.guild.channels.find('name', '🏃🏽-saída');
     let avatar = member.user.avatarURL
     if (!channel) return;
     let embed2 = new Discord.RichEmbed()
         .setColor('RANDOM')
         .setThumbnail(avatar)
-        .addField('🎈 Saiu do servidor.', `O ${member} saiu do BlackMC =(\n Agora temos __${member.guild.memberCount}__ Player(s) em nosso servidor.\n`)
-        .setFooter(`Black - Saída`);
+        .addField('🎈 Saiu do servidor.', `O ${member} saiu do ADSUMUS GAMING =(\n Agora temos __${member.guild.memberCount}__ Player(s) em nosso servidor.\n`)
+        .setFooter(`ADSUMUS - Saída`);
 	channel.sendEmbed(embed2);
   
     });
 client.on('guildMemberAdd', member => {
   let embed = new Discord.RichEmbed()
     .setColor('#2fd12c')
-    .setDescription(`Olá. Seja **bem-vindo(a)** ao Discord da nossa Rede Black! :tada: 
+    .setDescription(`Olá. Seja **bem-vindo(a)** ao Discord ADSUMUS GAMING! :tada: 
 :small_blue_diamond: Antes de interagir, leia o canal de **regras**.
-:small_blue_diamond: **Twitter:** @BlackMC.
-:small_blue_diamond: **IP:** BlackMC.cf`)
+:small_blue_diamond: Leia também o canal de **teste** para saber mais sobre o recrutamento.`)
     .setTimestamp()
 
   member.sendEmbed(embed);
@@ -126,36 +138,36 @@ client.on('message', async (msg) => {
                  color: 3447003,
                  description: 'Escolha uma música de acordo com as cores, clicando nas reações!'
                }}).then( async (embedMessage) => {
-                 await embedMessage.react('🟥');
-                 await embedMessage.react('🟦');
-                 await embedMessage.react('🟧');
-                 await embedMessage.react('🟩');
-                 await embedMessage.react('🟫');
+                 await embedMessage.react('0️⃣');
+                 await embedMessage.react('1️⃣');
+                 await embedMessage.react('2️⃣');
+                 await embedMessage.react('3️⃣');
+                 await embedMessage.react('4️⃣');
                  
                const filter = (reaction, user) => {
-               return ['🟥', '🟦', '🟧', '🟩', '🟫'].includes(reaction.emoji.name)
+               return ['0️⃣', '1️⃣', '2️⃣', '3️⃣', '4️⃣'].includes(reaction.emoji.name)
                  && user.id === msg.author.id;
             }
 
             let collector = embedMessage.createReactionCollector(filter, {time: 20000});
             collector.on('collect', async (reaction, rectionCollector) => {
-             if (reaction.emoji.name === '🟥'){
+             if (reaction.emoji.name === '0️⃣'){
             videoEncontrado = await youtube.getVideoByID(videosPesquisados[0].id);
             filaDeMusicas.push(`https://www.youtube.com/watch?v=${videoEncontrado.id}`);
           }
-          else if (reaction.emoji.name === '🟦'){
+          else if (reaction.emoji.name === '1️⃣'){
             videoEncontrado = await youtube.getVideoByID(videosPesquisados[1].id);
             filaDeMusicas.push(`https://www.youtube.com/watch?v=${videoEncontrado.id}`);
           }
-           else if (reaction.emoji.name === '🟧'){
+           else if (reaction.emoji.name === '2️⃣'){
             videoEncontrado = await youtube.getVideoByID(videosPesquisados[2].id);
             filaDeMusicas.push(`https://www.youtube.com/watch?v=${videoEncontrado.id}`);
            }
-           else if (reaction.emoji.name === '🟩'){
+           else if (reaction.emoji.name === '3️⃣'){
             videoEncontrado = await youtube.getVideoByID(videosPesquisados[3].id);
             filaDeMusicas.push(`https://www.youtube.com/watch?v=${videoEncontrado.id}`);
           }
-          else if (reaction.emoji.name === '🟫'){
+          else if (reaction.emoji.name === '4️⃣'){
             videoEncontrado = await youtube.getVideoByID(videosPesquisados[4].id);
             filaDeMusicas.push(`https://www.youtube.com/watch?v=${videoEncontrado.id}`);
           }
@@ -288,4 +300,3 @@ if(!message.content.startsWith(prefix)) return;
    }
 	
 });
-client.login(process.env.TOKEN);
