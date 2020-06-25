@@ -1,21 +1,10 @@
-const http = require('http');
-const express = require('express');
-const app = express();
-app.get("/", (request, response) => {
-  console.log(Date.now() + " Ping Received");
-  response.sendStatus(200);
-});
-app.listen(process.env.PORT);
-setInterval(() => {
-  http.get(`http://${process.env.PROJECT_DOMAIN}.glitch.me/`);
-}, 280000);
 console.log('Conectando...');
 const Discord = require('discord.js');
 const Youtube = require('simple-youtube-api');
 const Ytdl = require('ytdl-core');
 const filaDeMusicas = [];
 let estouPronto = false;
-const {GOOGLE_KEY, TOKEN } = require('./config.js');
+const {GOOGLE_KEY } = require('./config.js');
 const youtube = new Youtube(GOOGLE_KEY);
 const client = new Discord.Client();
 const preferencias = require('./config.json');
@@ -24,7 +13,7 @@ const prefixow = preferencias.prefixow;
 const fs = require('fs');
 var comandos = new Discord.Collection();
 
-client.login(TOKEN);
+client.login(process.env.token);
 
 client.on('ready', () =>{
 console.log('\n==============================');
