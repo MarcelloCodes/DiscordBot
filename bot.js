@@ -21,7 +21,7 @@ console.log('CONECTADO! BOT ONLINE!');
 console.log(`O meu prefixo é ${prefix}`);
 console.log('==============================');
 	
-    const activities = ['Free Fire', 'jogos como Vocês 😍', 'use ;ajuda para ver meus cmds.', 'criado por ADS Luffy#7305']
+    const activities = ['Free Fire', 'jogos como Vocês 😍', 'use ;ajuda para ver meus cmds.', 'criado por Cellin#7305']
     let counter = 0
     setInterval(function() {
         client.user.setGame(activities[counter], "https://www.twitch.tv/marcelloowdlc")
